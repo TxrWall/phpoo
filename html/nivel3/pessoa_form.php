@@ -1,8 +1,8 @@
 <?php
 
 if (!empty($_REQUEST['action'])) {
-    $dsn = "mysql:host=localhost;dbname=livro','root',''";
-    $conn = new PDO($dsn);
+
+    $conn = new PDO('mysql:host=127.0.0.1;dbname=livro', 'root', '');
 
     if ($_REQUEST['action'] == 'edit') {
 
@@ -12,7 +12,7 @@ if (!empty($_REQUEST['action'])) {
 
         $result = $conn->query("SELECT * FROM pessoa WHERE id = '{$id}'");
 
-        $pessoa = $result->fetch(PDO::FETCH_OBJ);
+        $pessoa = $result->fetch(PDO::FETCH_ASSOC);
     } else if ($_REQUEST['action'] == 'save') {
 
         // save commands
@@ -23,19 +23,19 @@ if (!empty($_REQUEST['action'])) {
 
             $result = $conn->query("
             INSERT INTO pessoa (
-                nome', '
-                endereco', 
-                'bairro', 
-                'telefone', 
-                'email', 
-                'id_cidade') 
+                nome,
+                endereco, 
+                bairro, 
+                telefone, 
+                email, 
+                id_cidade) 
             VALUES (
-                {$pessoa['nome']},
-                {$pessoa['endereco']},
-                {$pessoa['bairro']},
-                {$pessoa['telefone']},
-                {$pessoa['email']},
-                {$pessoa['id_cidade']}
+                \"{$pessoa['nome']}\",
+                \"{$pessoa['endereco']}\",
+                \"{$pessoa['bairro']}\",
+                \"{$pessoa['telefone']}\",
+                \"{$pessoa['email']}\",
+                \"{$pessoa['id_cidade']}\"
                 )
             ");
         } else {
@@ -50,10 +50,11 @@ if (!empty($_REQUEST['action'])) {
                 telefone = '$pessoa[telefone]', 
                 email = '$pessoa[email]',
                 id_cidade = '$pessoa[id_cidade]'
-            WHERE id = '{$pessoa[id]}'");
+            WHERE id = '{$pessoa['id']}'");
         }
 
-        print ($result) ? 'Registro salvo com sucesso' : pg_last_error($conn);
+        ($result) ? print 'Registro salvo com sucesso' : print_r($conn->errorInfo()[2]);
+        
         $conn = null;
     }
 } else {
@@ -72,7 +73,7 @@ if (!empty($_REQUEST['action'])) {
 
 require_once 'lista_combo_cidades.php';
 
-$form = file_get_contents('form.html');
+$form = file_get_contents('html/form.html');
 $form = str_replace('{id}', $pessoa['id'], $form);
 $form = str_replace('{nome}', $pessoa['nome'], $form);
 $form = str_replace('{endereco}', $pessoa['endereco'], $form);
