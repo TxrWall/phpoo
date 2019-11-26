@@ -62,14 +62,14 @@ function update_pessoa($pessoa)
 {
     $conn = new PDO('mysql:host=127.0.0.1;dbname=livro', 'root', '');
     $result = $conn->query("
-        UPDATE pessoa
-            SET nome = {$pessoa[id]},
-            endereco = {$pessoa[endereco]},
-            bairro = {$pessoa[bairro]},
-            telefone = {$pessoa[telefone]},
-            email = {$pessoa[email]},
-            id_cidade = {$pessoa[id_cidade]}
-        WHERE id = {$pessoa[id]}
-        ");
+    UPDATE pessoa
+        SET nome = '{$pessoa['nome']}',
+        endereco = '{$pessoa['endereco']}',
+        bairro = '{$pessoa['bairro']}',
+        telefone = '{$pessoa['telefone']}',
+        email = '{$pessoa['email']}',
+        id_cidade = '{$pessoa['id_cidade']}'
+    WHERE id = '{$pessoa['id']}'
+    ");
     return $result;
 }
