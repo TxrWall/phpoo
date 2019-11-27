@@ -13,8 +13,16 @@ class CSVParser
 
     public function parse()
     {
+        if (!file_exists($this->filename)) {
+            throw new FileNotFoundException("Arquivo {$this->filename} não encontrado.");
+        }
+        if (!is_readable($this->filename)) {
+            throw new FilePermissionException("Arquivo {$this->filename} não pode ser lido.");
+        }
+
         $this->data = file($this->filename);
         $this->header = str_getcsv($this->data[0], $this->separator);
+        return true;
     }
 
     public function fetch()
