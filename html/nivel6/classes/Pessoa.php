@@ -13,6 +13,7 @@ class Pessoa
             $name = $conexao['name'];
             $user = $conexao['user'];
             $pass = $conexao['pass'];
+            //self::$conn = new PDO("'mysql:host={$host};dbname={$name}'", "'{$user}'", "'{$pass}'"); acesso negado
             self::$conn = new PDO('mysql:host=127.0.0.1;dbname=livro', 'root', '');
             self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }

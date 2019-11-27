@@ -21,8 +21,7 @@ class PessoaForm
         ];
         $cidades = '';
         foreach (Cidade::all() as $cidade) {
-            $check = ($cidade['id'] == $pessoa['id_cidade']) ? 'selected' : '';
-            $cidades .= "<option $check value='{$cidade['id']}'>{$cidade['nome']}</option>\n";
+            $cidades .= "<option value='{$cidade['id']}'>{$cidade['nome']}</option>\n";
         }
         $this->html = str_replace('{cidades}', $cidades, $this->html);
     }
@@ -43,7 +42,7 @@ class PessoaForm
         try {
             Pessoa::save($param);
             $this->data = $param;
-            print 'Pessoa salva com sucesso';
+            print "Pessoa salva com sucesso";
         } catch (Exception $e) {
             print $e->getMessage();
         }

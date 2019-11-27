@@ -7,7 +7,7 @@ spl_autoload_register(function ($class) {
 });
 
 $classe = $_REQUEST['class'];
-$method = isset($_REQUEST['method']) ?? null;
+$method = isset($_REQUEST['method']) ? $_REQUEST['method'] : null;
 
 if(class_exists($classe)) {
     $pagina = new $classe($_REQUEST);
