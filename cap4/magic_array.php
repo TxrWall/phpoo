@@ -31,6 +31,6 @@ print '<br/><br/>Resetando valor da propriedade... <br/><br/>';
 
 unset($titulo->valor);
 
-print '<br>';
+print '<br><br>';
 
 print 'O valor é: ' . number_format($titulo->valor, 2, ',', '.');
