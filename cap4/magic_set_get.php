@@ -49,8 +49,8 @@ try {
     $titulo = new Titulo;
     $titulo->dt_vencimento = '2015-05-20';
     $titulo->valor = 12345;
-    $titulo->multa = 0;
-    $titulo->juros = 0.0;
+    $titulo->multa = 200;
+    $titulo->juros = 0.01;
     print 'O valor é: ' . number_format($titulo->valor, 2, ',', '.');
 } catch (Exception $e) {
     print $e->getMessage();
